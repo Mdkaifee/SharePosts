@@ -49,7 +49,9 @@ PORT=4000
 BACKEND_HOST=127.0.0.1
 FRONTEND_ORIGIN=http://localhost:5173
 PUBLIC_API_BASE_URL=http://localhost:4000
+DATABASE_URL=postgresql://apnitormacmini3@localhost:5432/shared_posts_db
 SOCIAL_DRY_RUN=true
+META_GRAPH_API_VERSION=v24.0
 
 META_APP_ID=
 META_APP_SECRET=
@@ -59,6 +61,7 @@ FACEBOOK_PAGE_ID=
 FACEBOOK_PAGE_ACCESS_TOKEN=
 LINKEDIN_ACCESS_TOKEN=
 LINKEDIN_AUTHOR_URN=
+LINKEDIN_API_VERSION=202605
 TWITTER_API_KEY=
 TWITTER_API_SECRET=
 TWITTER_ACCESS_TOKEN=
@@ -75,6 +78,7 @@ VITE_API_BASE_URL=http://127.0.0.1:4000
 Credential notes:
 
 - Instagram and Facebook need Meta app/page/account credentials.
+- Instagram media publishing needs `PUBLIC_API_BASE_URL` to be a public HTTPS URL so Meta can fetch uploaded media.
 - LinkedIn needs an access token and author URN.
 - X / Twitter needs app and user access credentials.
 
@@ -97,5 +101,6 @@ backend/app/social/adapters.py
 - `GET /api/posts`: saved local post history.
 - `POST /api/posts`: multipart post creation with optional `media`, `caption`, `textOnly`, and selected `platforms`.
 
-Uploaded files are stored in `backend/data/uploads`. Post history is stored in `backend/data/posts.json`.
+Uploaded files are stored in `backend/data/uploads`. Post history is stored in PostgreSQL when `DATABASE_URL` is set; otherwise it falls back to `backend/data/posts.json`.
 # SharePosts
+# Social-Media-Tool
